@@ -8,7 +8,8 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Support Auto-Responder',
         cost: 1500,
         roi: 40,
-        img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=400&q=80',
+        imgSad: 'https://images.unsplash.com/photo-1498758536662-35b82cd15e29?auto=format&fit=crop&w=400&q=80',
+        imgHappy: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
         applied: false
     },
     {
@@ -18,7 +19,8 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Invoice Extractor',
         cost: 1200,
         roi: 35,
-        img: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=80',
+        imgSad: 'https://images.unsplash.com/photo-1450101499163-c8848c66cb85?auto=format&fit=crop&w=400&q=80',
+        imgHappy: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=80',
         applied: false
     },
     {
@@ -28,7 +30,8 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Lead Nurture Bot',
         cost: 2000,
         roi: 50,
-        img: 'https://images.unsplash.com/photo-1556761175-5973dc0f32b7?auto=format&fit=crop&w=400&q=80',
+        imgSad: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80',
+        imgHappy: 'https://images.unsplash.com/photo-1556761175-5973dc0f32b7?auto=format&fit=crop&w=400&q=80',
         applied: false
     },
     {
@@ -38,7 +41,8 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Multi-Calendar Auto-Sync',
         cost: 1000,
         roi: 30,
-        img: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80',
+        imgSad: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=400&q=80',
+        imgHappy: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=80',
         applied: false
     },
     {
@@ -48,7 +52,8 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Content Scheduler',
         cost: 800,
         roi: 25,
-        img: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=400&q=80',
+        imgSad: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=400&q=80',
+        imgHappy: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80',
         applied: false
     }
 ];
@@ -110,9 +115,9 @@ function OfficeGame() {
                         }}
                     >
                         <div style={{ height: '140px', width: '100%', overflow: 'hidden', position: 'relative' }}>
-                            <img src={dep.img} alt={dep.title} style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: dep.applied ? 0.7 : 1, transition: 'all 0.3s' }} />
+                            <img src={dep.applied ? dep.imgHappy : dep.imgSad} alt={dep.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'all 0.4s ease-in-out' }} />
                             {dep.applied && (
-                                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(78, 242, 196, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(78, 242, 196, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.4s ease-in-out' }}>
                                     <span style={{ background: '#fff', padding: '0.4rem 1rem', borderRadius: '20px', fontWeight: 'bold', color: '#111', fontSize: '0.9rem', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>Optimized</span>
                                 </div>
                             )}
