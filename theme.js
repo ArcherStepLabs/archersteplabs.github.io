@@ -14,6 +14,8 @@ const THEMES = {
         '--header-scrolled-bg': 'rgba(243, 239, 230, 0.95)',
         '--logo-box-bg': '#faf8f5',
         '--logo-box-border': '#e6dfd5',
+        '--footer-bg': '#2d241e',
+        '--footer-text': '#ffffff',
         '--logo-src': 'ASL Logo Sepia Transparent 2048x2048.png'
     },
     dark: {
@@ -31,6 +33,8 @@ const THEMES = {
         '--header-scrolled-bg': 'rgba(15, 23, 42, 0.95)',
         '--logo-box-bg': '#1E293B',
         '--logo-box-border': '#334155',
+        '--footer-bg': '#060913',
+        '--footer-text': '#CBD5E1',
         '--logo-src': 'ASL Full Logo Transparent 2048x2048.png'
     }
 };
