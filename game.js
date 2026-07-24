@@ -145,7 +145,7 @@ function OfficeGame() {
                                         fontWeight: 'bold',
                                         cursor: !dep.applied && budget < dep.cost ? 'not-allowed' : 'pointer',
                                         background: dep.applied ? '#F70505' : (budget >= dep.cost ? 'var(--brand-gradient)' : 'var(--bg-accent)'),
-                                        color: '#fff',
+                                        color: 'var(--btn-text)',
                                         transition: 'all 0.2s ease',
                                         boxShadow: dep.applied ? '0 4px 12px rgba(247, 5, 5, 0.3)' : '0 4px 12px rgba(33, 150, 242, 0.2)'
                                     }}
@@ -162,7 +162,7 @@ function OfficeGame() {
                 <div style={{ marginTop: '2rem', padding: '1.5rem', background: 'rgba(78, 242, 196, 0.1)', border: '1px solid #4EF2C4', borderRadius: '12px', textAlign: 'center' }}>
                     <h3 style={{ color: 'var(--text-primary)', marginBottom: '0.5rem', fontFamily: 'Outfit, sans-serif' }}>🎉 Office Fully Optimized!</h3>
                     <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem' }}>You've transformed the business. Ready to do this in real life?</p>
-                    <a href="#contact" style={{ display: 'inline-block', padding: '0.75rem 1.5rem', background: 'var(--brand-gradient)', color: '#fff', fontWeight: 'bold', textDecoration: 'none', borderRadius: '8px', boxShadow: '0 4px 12px rgba(33,150,242,0.3)' }}>Book Your Free Audit</a>
+                    <a href="#contact" style={{ display: 'inline-block', padding: '0.75rem 1.5rem', background: 'var(--brand-gradient)', color: 'var(--btn-text)', fontWeight: 'bold', textDecoration: 'none', borderRadius: '8px', boxShadow: '0 4px 12px rgba(33,150,242,0.3)' }}>Book Your Free Audit</a>
                 </div>
             )}
         </div>

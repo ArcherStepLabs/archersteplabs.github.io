@@ -14,9 +14,10 @@ const THEMES = {
         '--header-scrolled-bg': 'rgba(243, 239, 230, 0.98)',
         '--logo-box-bg': 'transparent',
         '--logo-box-border': 'transparent',
-        '--footer-bg': '#111111', /* Very dark footer for light mode too? Or keep sepia dark? */
+        '--footer-bg': '#111111',
         '--footer-text': '#ffffff',
-        '--logo-src': 'ASL Logo Sepia Transparent 2048x2048.png'
+        '--logo-src': 'ASL Logo Sepia Transparent 2048x2048.png',
+        '--btn-text': '#ffffff'
     },
     dark: {
         '--bg-main': '#020617', /* Very dark background */
@@ -35,7 +36,8 @@ const THEMES = {
         '--logo-box-border': 'transparent',
         '--footer-bg': '#020617',
         '--footer-text': '#CBD5E1',
-        '--logo-src': 'ASL Full Logo Transparent 2048x2048.png'
+        '--logo-src': 'ASL Full Logo Transparent 2048x2048.png',
+        '--btn-text': '#000000'
     }
 };
 
