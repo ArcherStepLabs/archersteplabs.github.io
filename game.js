@@ -8,6 +8,7 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Support Auto-Responder',
         cost: 2200,
         roi: 40,
+        time: '5-6 Days',
         imgSad: 'https://images.unsplash.com/photo-1498758536662-35b82cd15e29?auto=format&fit=crop&w=400&q=80',
         imgHappy: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
         applied: false
@@ -19,6 +20,7 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Invoice Extractor',
         cost: 1800,
         roi: 35,
+        time: '5 Days',
         imgSad: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80',
         imgHappy: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=80',
         applied: false
@@ -30,6 +32,7 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Lead Nurture Bot',
         cost: 2800,
         roi: 50,
+        time: '6-7 Days',
         imgSad: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80',
         imgHappy: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=400&q=80',
         applied: false
@@ -41,6 +44,7 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Multi-Calendar Auto-Sync',
         cost: 1500,
         roi: 30,
+        time: '5 Days',
         imgSad: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=400&q=80',
         imgHappy: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=80',
         applied: false
@@ -52,6 +56,7 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Content Scheduler',
         cost: 1200,
         roi: 25,
+        time: '4-5 Days',
         imgSad: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=400&q=80',
         imgHappy: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80',
         applied: false
@@ -130,7 +135,10 @@ function OfficeGame() {
                                 </p>
                             </div>
                             <div style={{ marginTop: 'auto' }}>
-                                <p style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>{dep.solution}</p>
+                                <p style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>{dep.solution}</p>
+                                <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                                    <span>⏱️</span> Est. Turnaround: <strong style={{ color: 'var(--text-primary)' }}>{dep.time}</strong>
+                                </p>
                                 <button 
                                     onClick={(e) => {
                                         e.stopPropagation();
