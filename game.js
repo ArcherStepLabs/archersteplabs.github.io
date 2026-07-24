@@ -19,7 +19,7 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Invoice Extractor',
         cost: 1200,
         roi: 35,
-        imgSad: 'https://images.unsplash.com/photo-1450101499163-c8848c66cb85?auto=format&fit=crop&w=400&q=80',
+        imgSad: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80',
         imgHappy: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=80',
         applied: false
     },
@@ -31,7 +31,7 @@ const DEPARTMENTS_DATA = [
         cost: 2000,
         roi: 50,
         imgSad: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80',
-        imgHappy: 'https://images.unsplash.com/photo-1556761175-5973dc0f32b7?auto=format&fit=crop&w=400&q=80',
+        imgHappy: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=400&q=80',
         applied: false
     },
     {
