@@ -145,7 +145,7 @@ function OfficeGame() {
                                         fontWeight: 'bold',
                                         cursor: !dep.applied && budget < dep.cost ? 'not-allowed' : 'pointer',
                                         background: dep.applied ? '#F70505' : (budget >= dep.cost ? 'var(--brand-gradient)' : 'var(--bg-accent)'),
-                                        color: 'var(--btn-text)',
+                                        color: dep.applied ? '#fff' : (budget >= dep.cost ? 'var(--btn-text)' : 'var(--text-muted)'),
                                         transition: 'all 0.2s ease',
                                         boxShadow: dep.applied ? '0 4px 12px rgba(247, 5, 5, 0.3)' : '0 4px 12px rgba(33, 150, 242, 0.2)'
                                     }}
