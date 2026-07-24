@@ -46,15 +46,24 @@ function OfficeGame() {
 
     const [deps, setDeps] = useState(departments);
 
-    const applySolution = (index) => {
+    const toggleSolution = (index) => {
         const dep = deps[index];
-        if (dep.applied || budget < dep.cost) return;
-
         const newDeps = [...deps];
-        newDeps[index].applied = true;
-        setDeps(newDeps);
-        setBudget(prev => prev - dep.cost);
-        setEfficiency(prev => Math.min(100, prev + dep.roi));
+
+        if (dep.applied) {
+            // Remove solution
+            newDeps[index].applied = false;
+            setDeps(newDeps);
+            setBudget(prev => prev + dep.cost);
+            setEfficiency(prev => Math.max(20, prev - dep.roi));
+        } else {
+            // Apply solution if budget allows
+            if (budget < dep.cost) return;
+            newDeps[index].applied = true;
+            setDeps(newDeps);
+            setBudget(prev => prev - dep.cost);
+            setEfficiency(prev => Math.min(100, prev + dep.roi));
+        }
     };
 
     return (
@@ -62,7 +71,7 @@ function OfficeGame() {
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
                     <h3 style={{ fontSize: '1.8rem', color: 'var(--text-primary)', marginBottom: '0.5rem', fontFamily: 'Outfit, sans-serif', fontWeight: 700 }}>Office Optimization Simulator</h3>
-                    <p style={{ color: 'var(--text-secondary)' }}>Click to apply AI solutions and optimize your office within budget.</p>
+                    <p style={{ color: 'var(--text-secondary)' }}>Click any solution to toggle it ON or OFF and test different budget strategies.</p>
                 </div>
                 <div style={{ display: 'flex', gap: '1.5rem' }}>
                     <div style={{ padding: '1rem 1.5rem', background: 'rgba(33, 150, 242, 0.1)', borderRadius: '8px', border: '1px solid rgba(33, 150, 242, 0.2)' }}>
@@ -83,7 +92,7 @@ function OfficeGame() {
                         borderRadius: '12px', 
                         border: '1px solid',
                         borderColor: dep.applied ? 'var(--brand-secondary)' : 'var(--border-color)',
-                        background: dep.applied ? 'rgba(78, 242, 196, 0.05)' : 'var(--bg-main)',
+                        background: dep.applied ? 'rgba(78, 242, 196, 0.08)' : 'var(--bg-main)',
                         transition: 'all 0.3s ease',
                         display: 'flex', flexDirection: 'column', justifyContent: 'space-between'
                     }}>
@@ -96,21 +105,21 @@ function OfficeGame() {
                         <div style={{ marginTop: 'auto' }}>
                             <p style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>{dep.solution}</p>
                             <button 
-                                onClick={() => applySolution(idx)}
-                                disabled={dep.applied || budget < dep.cost}
+                                onClick={() => toggleSolution(idx)}
+                                disabled={!dep.applied && budget < dep.cost}
                                 style={{
                                     width: '100%',
                                     padding: '0.75rem',
                                     borderRadius: '8px',
                                     border: 'none',
                                     fontWeight: 'bold',
-                                    cursor: dep.applied || budget < dep.cost ? 'not-allowed' : 'pointer',
-                                    background: dep.applied ? 'var(--bg-accent)' : (budget >= dep.cost ? 'var(--brand-gradient)' : 'var(--bg-accent)'),
-                                    color: dep.applied || budget < dep.cost ? 'var(--text-muted)' : '#fff',
+                                    cursor: !dep.applied && budget < dep.cost ? 'not-allowed' : 'pointer',
+                                    background: dep.applied ? 'rgba(247, 5, 5, 0.15)' : (budget >= dep.cost ? 'var(--brand-gradient)' : 'var(--bg-accent)'),
+                                    color: dep.applied ? '#F70505' : (!dep.applied && budget < dep.cost ? 'var(--text-muted)' : '#fff'),
                                     transition: 'all 0.2s ease'
                                 }}
                             >
-                                {dep.applied ? 'Applied' : `Apply for $${dep.cost}`}
+                                {dep.applied ? 'Remove Solution' : `Apply for $${dep.cost}`}
                             </button>
                         </div>
                     </div>

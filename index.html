@@ -72,7 +72,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(248, 250, 252, 0.85); /* Semi-transparent background */
+            background-color: var(--header-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
@@ -81,7 +81,7 @@
         }
 
         header.scrolled {
-            background-color: rgba(248, 250, 252, 0.95);
+            background-color: var(--header-scrolled-bg);
             box-shadow: var(--shadow-sm);
         }
 
@@ -295,8 +295,8 @@
         }
 
         .hero-logo-box {
-            background: #faf8f5; /* Soft ivory/alabaster - Brighter than background, softer than stark white */
-            border: 1px solid #e6dfd5;
+            background: var(--logo-box-bg);
+            border: 1px solid var(--logo-box-border);
             border-radius: 24px;
             padding: 3rem;
             box-shadow: var(--shadow-lg);

@@ -10,6 +10,10 @@ const THEMES = {
         '--brand-secondary': '#805934',
         '--brand-gradient': 'linear-gradient(135deg, #a7794f 0%, #805934 100%)',
         '--border-color': '#e9e4dc',
+        '--header-bg': 'rgba(243, 239, 230, 0.85)',
+        '--header-scrolled-bg': 'rgba(243, 239, 230, 0.95)',
+        '--logo-box-bg': '#faf8f5',
+        '--logo-box-border': '#e6dfd5',
         '--logo-src': 'ASL Logo Sepia Transparent 2048x2048.png'
     },
     dark: {
@@ -22,7 +26,11 @@ const THEMES = {
         '--brand-primary': '#2196F2', /* ASL Blue */
         '--brand-secondary': '#4EF2C4', /* ASL Aqua */
         '--brand-gradient': 'linear-gradient(135deg, #2196F2 0%, #4EF2C4 100%)',
-        '--border-color': '#475569',
+        '--border-color': '#334155',
+        '--header-bg': 'rgba(15, 23, 42, 0.85)',
+        '--header-scrolled-bg': 'rgba(15, 23, 42, 0.95)',
+        '--logo-box-bg': '#1E293B',
+        '--logo-box-border': '#334155',
         '--logo-src': 'ASL Full Logo Transparent 2048x2048.png'
     }
 };
@@ -52,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('asl-theme');
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    // Default to dark theme unless sepia is explicitly saved, since Dark is our "Tech" brand
+    // Default to dark theme unless sepia is explicitly saved
     const initialTheme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'sepia');
     applyTheme(initialTheme);
 
