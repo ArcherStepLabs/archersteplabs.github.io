@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archer Step Labs | Corporate AI & Automation Consultancy</title>
+    <!-- Google Fonts: Inter and Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- React & Babel for Game Component -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="theme.js"></script>
+    
+    <style>
+        /* Modern CSS Reset & Variable Definitions */
+        :root {
+            --bg-main: #f3efe6; /* Rich, elegant warm linen cream */
+            --bg-card: #ffffff;
+            --bg-accent: #e8e3d7; /* Slightly darker warm accent */
+            --text-primary: #2d241e; /* Rich espresso charcoal */
+            --text-secondary: #6b5f55; /* Warm taupe */
+            --text-muted: #8e8174; /* Soft wood smoke */
+            --brand-primary: #a7794f; /* Elegant warm bronze */
+            --brand-secondary: #805934; /* Deep sepia gold */
+            --brand-gradient: linear-gradient(135deg, #a7794f 0%, #805934 100%);
+            --border-color: #e9e4dc; /* Warm border line */
+            --shadow-sm: 0 2px 8px rgba(45, 36, 30, 0.04);
+            --shadow-md: 0 12px 24px -10px rgba(45, 36, 30, 0.08);
+            --shadow-lg: 0 20px 40px -15px rgba(45, 36, 30, 0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --max-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        /* Navigation Bar Styling */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(248, 250, 252, 0.85); /* Semi-transparent background */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background-color: rgba(248, 250, 252, 0.95);
+            box-shadow: var(--shadow-sm);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 0.75rem;
+            transition: var(--transition);
+        }
+
+        .logo-container:hover {
+            transform: translateY(-1px);
+        }
+
+        .logo-img {
+            height: 38px; /* Taller height since container has no padding */
+            width: auto;
+            object-fit: contain;
+            transition: var(--transition);
+            /* Renders the custom sepia logo which has pre-swapped colors */
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary); /* Matches the espresso charcoal text */
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--brand-gradient);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--brand-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-nav {
+            background: var(--brand-gradient);
+            color: white !important;
+            padding: 0.6rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-nav::after {
+            display: none !important;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: var(--text-primary);
+            margin: 6px 0;
+            transition: var(--transition);
+        }
+
+        /* Hero Section Styling */
+        .hero {
+            padding: 180px 0 100px 0;
+            position: relative;
+            background: radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 10% 80%, rgba(79, 70, 229, 0.03) 0%, transparent 50%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(37, 99, 235, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.15);
+            color: var(--brand-primary);
+            padding: 0.35rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 580px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.85rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--brand-gradient);
+            color: white;
+            border: none;
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(37, 99, 235, 0.35);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            background-color: var(--bg-accent);
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-logo-box {
+            background: #faf8f5; /* Soft ivory/alabaster - Brighter than background, softer than stark white */
+            border: 1px solid #e6dfd5;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-logo-large {
+            max-width: 250px;
+            height: auto;
+            /* Renders the custom sepia logo which has pre-swapped colors */
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Section Global Settings */
+        .section {
+            padding: 100px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section-header {
+            max-width: 700px;
+            margin-bottom: 4.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Services Grid Styling */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background-color: rgba(37, 99, 235, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-primary);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-list {
+            list-style: none;
+            margin-top: 1rem;
+            border-top: 1px solid var(--bg-accent);
+            padding-top: 1rem;
+        }
+
+        .service-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .service-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--brand-primary);
+            font-weight: bold;
+        }
+
+        /* How We Work Section */
+        .process-flow {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            position: relative;
+        }
+
+        .process-step {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -24px;
+            left: 2rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--brand-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .process-step h3 {
+            margin-top: 0.5rem;
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .process-step p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Target Client Section */
+        .client-section {
+            background-color: var(--bg-accent);
+        }
+
+        .client-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .client-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .client-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .client-types {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .client-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .client-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--brand-primary);
+        }
+
+        .client-box p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Contact Section & Form */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-method:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--brand-primary);
+            line-height: 1;
+        }
+
+        .contact-details h4 {
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-details p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-details a {
+            color: var(--brand-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-details a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            border: none;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: var(--text-primary);
+            color: #ffffff;
+            padding: 5rem 0 3rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 4rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-about p {
+            color: #94a3b8; /* Slate 400 */
+            max-width: 450px;
+            margin-top: 1rem;
+        }
+
+        .footer-logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            /* Renders the custom sepia logo which has pre-swapped colors */
+        }
+
+        .footer-links h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design / Media Queries */
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .hero-content {
+                margin: 0 auto;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-btns {
+                justify-content: center;
+            }
+
+            .process-flow {
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
+            }
+
+            .process-step {
+                max-width: 450px;
+                margin: 0 auto;
+            }
+
+            .client-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Hide for mobile nav */
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .client-types {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo-container">
+                    <img src="ASL Logo Sepia Transparent 2048x2048.png" alt="Archer Step Labs Logo White" class="footer-logo-img theme-logo">
+                    <span class="logo-text" style="color: white;">Archer Step Labs</span>
+                </a>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#services">Interactive Simulator</a></li>
+                    <li><a href="#about">How We Work</a></li>
+                    <li><a href="#audience">Who We Serve</a></li>
+                    <li><a href="#contact" class="btn-nav">Get a Free Prototype</a></li>
+                    <li>
+                        <button id="theme-toggle" style="background:none; border:none; font-size:1.4rem; cursor:pointer;" aria-label="Toggle Theme">🌙</button>
+                    </li>
+                </ul>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <span class="badge">Practical AI & Automation</span>
+                    <h1>Eliminating Mundane Tasks With <span>Tailored AI Solutions</span></h1>
+                    <p>We audit your daily operations, find repetitive bottlenecks, and build custom workflow automations. Move faster, scale your output, and let AI handle the day-to-day grind.</p>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn btn-primary">Book an AI Audit</a>
+                        <a href="#services" class="btn btn-secondary">Explore Services</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-logo-box">
+                        <img src="ASL Logo Sepia Transparent 2048x2048.png" alt="Archer Step Labs Large Logo" class="hero-logo-large theme-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section / Interactive Game Simulator -->
+    <section class="section" id="services">
+        <div class="container">
+            <!-- React Game Mount Point -->
+            <div id="react-game-root"></div>
+        </div>
+    </section>
+
+    <!-- How We Work Section -->
+    <section class="section" id="about" style="background-color: var(--bg-accent);">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: 5.5rem;">
+                <h2>Our "Test Product" Philosophy</h2>
+                <p>We don't sell bloated contracts or slides. We prove our value by showing you working solutions before you commit.</p>
+            </div>
+
+            <div class="process-flow">
+                <!-- Step 1 -->
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>1. Discover & Strategy</h3>
+                    <p>We hop on a quick discovery call to discuss your biggest operational headaches and repetitive tasks.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>2. We Build a Prototype</h3>
+                    <p>We develop a simple, working proof-of-concept solution tailored to your team's needs to show you what is possible.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>3. Deploy & Support</h3>
+                    <p>We deploy the final solution, train your team, and provide ongoing maintenance to keep everything running smoothly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Serve Section -->
+    <section class="section" id="audience">
+        <div class="container">
+            <div class="client-grid">
+                <div class="client-content">
+                    <h2>Built for Startups, SMEs & Solo Entrepreneurs</h2>
+                    <p>If you don't have an internal technical team but want to harness the power of AI to work 10x faster and eliminate mundane admin tasks, we are built for you.</p>
+                    <a href="#contact" class="btn btn-primary">Schedule a Call</a>
+                </div>
+                <div class="client-types">
+                    <div class="client-box">
+                        <h4>Solo Entrepreneurs</h4>
+                        <p>Automate your client onboarding, invoice follow-ups, and lead capture systems to run your business on autopilot.</p>
+                    </div>
+                    <div class="client-box">
+                        <h4>SMEs & Startups</h4>
+                        <p>Speed up sales cycles, customer service responses, and reporting procedures across small internal departments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div>
+                        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Let's Talk Automation</h2>
+                        <p style="color: var(--text-secondary);">Submit the form to request a free workflow review or schedule a quick meeting. We’ll show you a working prototype.</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-method">
+                            <span class="contact-icon">📧</span>
+                            <div class="contact-details">
+                                <h4>Email Us Directly</h4>
+                                <p><a href="mailto:pn@archersteplabs.com">pn@archersteplabs.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <span class="contact-icon">📞</span>
+                            <div class="contact-details">
+                                <h4>Call (UK)</h4>
+                                <p><a href="tel:+447500000096">+44 7500 000 096</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Contact Form -->
+                <div>
+                    <form class="contact-form" id="consultation-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" required placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Business Email</label>
+                                <input type="email" id="email" required placeholder="john@company.com">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" placeholder="e.g. +44 7500 000000">
+                            </div>
+                            <div class="form-group">
+                                <label for="interest">What are you looking to automate?</label>
+                                <select id="interest" required>
+                                    <option value="" disabled selected>Select an option...</option>
+                                    <option value="Workflow Automation (Zapier/n8n)">Workflow Automation (Zapier/n8n)</option>
+                                    <option value="AI Consultation & Audit">AI Consultation & Audit</option>
+                                    <option value="Custom AI App or Prototype">Custom AI App or Prototype</option>
+                                    <option value="General Inquiry">General Inquiry</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Briefly describe your manual bottlenecks</label>
+                            <textarea id="message" rows="4" required placeholder="e.g. We spend 5 hours a week copy-pasting customer details from emails into spreadsheets..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-submit">Request Free Consultation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <!-- Uses same logo with brightness filter to make it look clean on dark footer -->
+                    <img src="ASL Logo Sepia Transparent 2048x2048.png" alt="Archer Step Labs Logo White" class="footer-logo-img theme-logo">
+                    <p>Archer Step Labs provides practical, low-code AI and workflow automation consulting designed to help growing businesses eliminate manual work.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigate</h4>
+                    <ul>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">How We Work</a></li>
+                        <li><a href="#audience">Who We Serve</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Archer Step Labs. All rights reserved.</p>
+                <p>UK-Based | Serving Global Clients</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Simple JavaScript for mobile menu and form handling -->
+    <script>
+        // Header styling on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            // Simple toggle animation for menu button
+            menuToggle.classList.toggle('active');
+        });
+
+        // Contact Form redirect to pre-filled Email (Mailto Client-side fallback)
+        document.getElementById('consultation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value || "Not provided";
+            const interest = document.getElementById('interest').value;
+            const message = document.getElementById('message').value;
+            
+            const subject = encodeURIComponent(`Archer Step Labs Inquiry from ${name}`);
+            const body = encodeURIComponent(
+                `Hello Archer Step Labs,\n\n` +
+                `I would like to request a consultation.\n\n` +
+                `Name: ${name}\n` +
+                `Email: ${email}\n` +
+                `Phone: ${phone}\n` +
+                `Service Needed: ${interest}\n\n` +
+                `Details on Manual Bottlenecks:\n${message}\n\n` +
+                `Please contact me to discuss a prototype.`
+            );
+            
+            // Open user's default email client
+            window.location.href = `mailto:pn@archersteplabs.com?subject=${subject}&body=${body}`;
+            
+            alert("Opening your email client to send the pre-filled consultation request. Thank you!");
+        });
+    </script>
+    <script type="text/babel" src="game.js"></script>
+</body>
+</html>
