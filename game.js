@@ -8,6 +8,7 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Support Auto-Responder',
         cost: 1500,
         roi: 40,
+        img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=400&q=80',
         applied: false
     },
     {
@@ -17,6 +18,7 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Invoice Extractor',
         cost: 1200,
         roi: 35,
+        img: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=80',
         applied: false
     },
     {
@@ -26,6 +28,7 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Lead Nurture Bot',
         cost: 2000,
         roi: 50,
+        img: 'https://images.unsplash.com/photo-1556761175-5973dc0f32b7?auto=format&fit=crop&w=400&q=80',
         applied: false
     },
     {
@@ -35,6 +38,7 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Multi-Calendar Auto-Sync',
         cost: 1000,
         roi: 30,
+        img: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80',
         applied: false
     },
     {
@@ -44,6 +48,7 @@ const DEPARTMENTS_DATA = [
         solution: 'AI Content Scheduler',
         cost: 800,
         roi: 25,
+        img: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=400&q=80',
         applied: false
     }
 ];
@@ -95,45 +100,54 @@ function OfficeGame() {
                         key={dep.id} 
                         onClick={() => toggleSolution(idx)}
                         style={{ 
-                            padding: '1.5rem', 
                             borderRadius: '12px', 
                             border: '2px solid',
                             borderColor: dep.applied ? 'var(--brand-secondary)' : 'var(--border-color)',
                             background: dep.applied ? 'rgba(78, 242, 196, 0.08)' : 'var(--bg-main)',
                             transition: 'all 0.3s ease',
                             cursor: (!dep.applied && budget < dep.cost) ? 'not-allowed' : 'pointer',
-                            display: 'flex', flexDirection: 'column', justifyContent: 'space-between'
+                            display: 'flex', flexDirection: 'column', overflow: 'hidden'
                         }}
                     >
-                        <div>
-                            <h4 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: 'var(--text-primary)', fontFamily: 'Outfit, sans-serif' }}>{dep.title}</h4>
-                            <p style={{ fontSize: '0.9rem', color: dep.applied ? 'var(--brand-secondary)' : 'var(--text-muted)', marginBottom: '1rem', fontWeight: dep.applied ? 'bold' : 'normal' }}>
-                                {dep.applied ? "✅ Fully Optimized" : `⚠️ Bottleneck: ${dep.bottleneck}`}
-                            </p>
+                        <div style={{ height: '140px', width: '100%', overflow: 'hidden', position: 'relative' }}>
+                            <img src={dep.img} alt={dep.title} style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: dep.applied ? 0.7 : 1, transition: 'all 0.3s' }} />
+                            {dep.applied && (
+                                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(78, 242, 196, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <span style={{ background: '#fff', padding: '0.4rem 1rem', borderRadius: '20px', fontWeight: 'bold', color: '#111', fontSize: '0.9rem', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>Optimized</span>
+                                </div>
+                            )}
                         </div>
-                        <div style={{ marginTop: 'auto' }}>
-                            <p style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>{dep.solution}</p>
-                            <button 
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    toggleSolution(idx);
-                                }}
-                                disabled={!dep.applied && budget < dep.cost}
-                                style={{
-                                    width: '100%',
-                                    padding: '0.75rem',
-                                    borderRadius: '8px',
-                                    border: 'none',
-                                    fontWeight: 'bold',
-                                    cursor: !dep.applied && budget < dep.cost ? 'not-allowed' : 'pointer',
-                                    background: dep.applied ? '#F70505' : (budget >= dep.cost ? 'var(--brand-gradient)' : 'var(--bg-accent)'),
-                                    color: '#fff',
-                                    transition: 'all 0.2s ease',
-                                    boxShadow: dep.applied ? '0 4px 12px rgba(247, 5, 5, 0.3)' : '0 4px 12px rgba(33, 150, 242, 0.2)'
-                                }}
-                            >
-                                {dep.applied ? '❌ Remove Solution' : `➕ Apply for £${dep.cost}`}
-                            </button>
+                        <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                            <div style={{ flex: 1 }}>
+                                <h4 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: 'var(--text-primary)', fontFamily: 'Outfit, sans-serif' }}>{dep.title}</h4>
+                                <p style={{ fontSize: '0.9rem', color: dep.applied ? 'var(--brand-secondary)' : 'var(--text-muted)', marginBottom: '1rem', fontWeight: dep.applied ? 'bold' : 'normal' }}>
+                                    {dep.applied ? "✅ Fully Optimized" : `⚠️ Bottleneck: ${dep.bottleneck}`}
+                                </p>
+                            </div>
+                            <div style={{ marginTop: 'auto' }}>
+                                <p style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>{dep.solution}</p>
+                                <button 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        toggleSolution(idx);
+                                    }}
+                                    disabled={!dep.applied && budget < dep.cost}
+                                    style={{
+                                        width: '100%',
+                                        padding: '0.75rem',
+                                        borderRadius: '8px',
+                                        border: 'none',
+                                        fontWeight: 'bold',
+                                        cursor: !dep.applied && budget < dep.cost ? 'not-allowed' : 'pointer',
+                                        background: dep.applied ? '#F70505' : (budget >= dep.cost ? 'var(--brand-gradient)' : 'var(--bg-accent)'),
+                                        color: '#fff',
+                                        transition: 'all 0.2s ease',
+                                        boxShadow: dep.applied ? '0 4px 12px rgba(247, 5, 5, 0.3)' : '0 4px 12px rgba(33, 150, 242, 0.2)'
+                                    }}
+                                >
+                                    {dep.applied ? '❌ Remove Solution' : `➕ Apply for £${dep.cost}`}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 ))}
