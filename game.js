@@ -150,7 +150,7 @@ function OfficeGame() {
                                         boxShadow: dep.applied ? '0 4px 12px rgba(247, 5, 5, 0.3)' : '0 4px 12px rgba(33, 150, 242, 0.2)'
                                     }}
                                 >
-                                    {dep.applied ? '❌ Remove Solution' : `➕ Apply for £${dep.cost}`}
+                                    {dep.applied ? '❌ Change Solution' : `➕ Apply for £${dep.cost}`}
                                 </button>
                             </div>
                         </div>
