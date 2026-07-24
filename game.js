@@ -29,6 +29,15 @@ const DEPARTMENTS_DATA = [
         applied: false
     },
     {
+        id: 'calendar',
+        title: 'Calendar & Scheduling',
+        bottleneck: 'Scattered Outlook, Google & CRM calendars causing double bookings.',
+        solution: 'AI Multi-Calendar Auto-Sync',
+        cost: 1000,
+        roi: 30,
+        applied: false
+    },
+    {
         id: 'social',
         title: 'Social Media',
         bottleneck: 'Struggling to write posts daily.',
