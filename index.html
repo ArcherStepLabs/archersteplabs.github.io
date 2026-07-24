@@ -464,6 +464,64 @@
             font-size: 0.95rem;
         }
 
+        /* Case Study Section */
+        .case-study-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .case-study-content h3 {
+            font-size: 1.5rem;
+            color: var(--brand-primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .case-study-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .case-study-content p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-study-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--brand-secondary);
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
         /* Target Client Section */
         .client-section {
             background-color: var(--bg-accent);
@@ -769,8 +827,9 @@
                 <ul class="nav-links" id="nav-links">
                     <li><a href="#services">Interactive Simulator</a></li>
                     <li><a href="#about">How We Work</a></li>
+                    <li><a href="#case-study">Case Study</a></li>
                     <li><a href="#audience">Who We Serve</a></li>
-                    <li><a href="#contact" class="btn-nav">Get a Free Prototype</a></li>
+                    <li><a href="#contact" class="btn-nav">Get a Free Quote</a></li>
                     <li>
                         <button id="theme-toggle" style="background:none; border:none; font-size:1.4rem; cursor:pointer;" aria-label="Toggle Theme">🌙</button>
                     </li>
@@ -840,6 +899,41 @@
                     <div class="step-number">3</div>
                     <h3>3. Deploy & Support</h3>
                     <p>We deploy the final solution, train your team, and provide ongoing maintenance to keep everything running smoothly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Section -->
+    <section class="section" id="case-study">
+        <div class="container">
+            <div class="section-header">
+                <h2>Real Results: Regional Estate Agency</h2>
+                <p>See how we transformed a sales office by automating their scheduling and lead follow-ups.</p>
+            </div>
+            
+            <div class="case-study-card">
+                <div class="case-study-content">
+                    <h3>The Challenge</h3>
+                    <p>The sales team struggled with scattered calendars (Outlook, Google, and CRM) leading to double-booked property viewings. High volumes of inbound leads were falling through the cracks, resulting in lost commissions.</p>
+                    
+                    <h3>The Solution</h3>
+                    <p>We deployed an <strong>AI Multi-Calendar Auto-Sync</strong> system to unify all schedules instantly. We also implemented an <strong>AI Lead Nurture Bot</strong> that automatically engages new property inquiries 24/7 and books them directly into available slots.</p>
+                    
+                    <div class="case-study-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">0</span>
+                            <span class="stat-label">Double Bookings</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">£45k</span>
+                            <span class="stat-label">Extra Commission (Q1)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">22 hrs</span>
+                            <span class="stat-label">Saved per week</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
