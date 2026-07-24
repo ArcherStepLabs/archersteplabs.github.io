@@ -80,7 +80,7 @@ function OfficeGame() {
                 <div style={{ display: 'flex', gap: '1.5rem' }}>
                     <div style={{ padding: '1rem 1.5rem', background: 'rgba(33, 150, 242, 0.1)', borderRadius: '8px', border: '1px solid rgba(33, 150, 242, 0.2)' }}>
                         <p style={{ fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>Remaining Budget</p>
-                        <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: budget > 0 ? 'var(--brand-primary)' : 'var(--text-muted)' }}>${budget.toLocaleString()}</p>
+                        <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: budget > 0 ? 'var(--brand-primary)' : 'var(--text-muted)' }}>£{budget.toLocaleString()}</p>
                     </div>
                     <div style={{ padding: '1rem 1.5rem', background: 'rgba(78, 242, 196, 0.1)', borderRadius: '8px', border: '1px solid rgba(78, 242, 196, 0.2)' }}>
                         <p style={{ fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>Efficiency Score</p>
@@ -132,7 +132,7 @@ function OfficeGame() {
                                     boxShadow: dep.applied ? '0 4px 12px rgba(247, 5, 5, 0.3)' : '0 4px 12px rgba(33, 150, 242, 0.2)'
                                 }}
                             >
-                                {dep.applied ? '❌ Remove Solution' : `➕ Apply for $${dep.cost}`}
+                                {dep.applied ? '❌ Remove Solution' : `➕ Apply for £${dep.cost}`}
                             </button>
                         </div>
                     </div>
